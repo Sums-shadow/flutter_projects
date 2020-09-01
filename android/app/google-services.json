@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "197088781666",
+    "firebase_url": "https://avenirbizdrc.firebaseio.com",
+    "project_id": "avenirbizdrc",
+    "storage_bucket": "avenirbizdrc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197088781666:android:c247ecdd7a1622aa3a383b",
+        "android_client_info": {
+          "package_name": "com.example.sums"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197088781666-rahl4hooa35lk3jo7gk6t43bgsuaflpq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtFwxGQV_-F4pjciWOGWatSZQCSa7M_pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197088781666-pl8504sg175apu059j25mmr60240osb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
