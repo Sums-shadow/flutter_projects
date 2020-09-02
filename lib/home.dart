@@ -8,6 +8,8 @@ import 'package:sums/localisation/home_localisation.dart';
 import 'package:sums/login.dart';
 import 'package:sums/quiz/home_quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sums/speech/speechtext.dart';
+import 'package:sums/speech/textSpeech.dart';
 import 'package:sums/url_preview/home_url_preview.dart';
 
 class Home extends StatefulWidget {
@@ -103,6 +105,20 @@ class _HomeState extends State<Home> {
                       builder: (ctx) => new UrlPreview()));
                 },
               ),
+              ListTile(
+                title: Text("speech to text"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new SpecheeText()));
+                },
+              ),
+              // ListTile(
+              //   title: Text("text to speech"),
+              //   onTap: () {
+              //     Navigator.of(context).push(new MaterialPageRoute(
+              //         builder: (ctx) => new TextSpeech()));
+              //   },
+              // ),
             ],
           ),
         ),
