@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:sums/model/produit.dart';
 
 
 class AllProduct extends StatefulWidget {
@@ -11,7 +12,7 @@ class AllProduct extends StatefulWidget {
 class _AllProductState extends State<AllProduct> {
   QuerySnapshot data;
   Firestore fs=Firestore.instance;
-   
+    Produit prod;
   @override
   void initState() {
     // TODO: implement initState
@@ -31,6 +32,8 @@ class _AllProductState extends State<AllProduct> {
       ),
       body:data!=null
           ?ListView.builder(
+            physics: BouncingScrollPhysics(),
+             
           itemCount: data.documents.length,
           itemBuilder: (ctx, i){
       //       List imgs=[];
@@ -42,11 +45,12 @@ class _AllProductState extends State<AllProduct> {
 
       // });
       // print(imgs[0]);
+      prod=new Produit(null,data.documents[i]["nom"],data.documents[i]["prix"],data.documents[i]["image"]);
             return ListTile(
-              title: Text(data.documents[i]["nom"]),
-              subtitle: Text(data.documents[i]["image"]),
+              title: Text(prod.nom.toString()),
+              subtitle: Text(prod.prix.toString()),
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(data.documents[i]["image"].toString()),
+                backgroundImage: NetworkImage(prod.image.toString()),
               ),
             );
       })

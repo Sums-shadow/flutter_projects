@@ -4,6 +4,7 @@ import 'package:sums/admin/admin_home.dart';
 import 'package:sums/api/homeapi.dart';
 import 'package:sums/constant.dart';
 import 'package:sums/ecommerce/ecommerce.dart';
+import 'package:sums/ecommerce/home_ecom.dart';
 import 'package:sums/localisation/home_localisation.dart';
 import 'package:sums/login.dart';
 import 'package:sums/quiz/home_quiz.dart';
@@ -67,7 +68,15 @@ class _HomeState extends State<Home> {
                 title: Text("Ecommerce"),
                 onTap: () {
                   Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (ctx) => new Ecommerce()));
+                      new MaterialPageRoute(builder: (ctx) => new HomeEcommerce()));
+                },
+              ),
+              
+              ListTile(
+                title: Text("Admin"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new Admin_Home()));
                 },
               ),
               ListTile(
@@ -75,13 +84,6 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Navigator.of(context).push(
                       new MaterialPageRoute(builder: (ctx) => new HomeApi()));
-                },
-              ),
-              ListTile(
-                title: Text("Admin"),
-                onTap: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (ctx) => new Admin_Home()));
                 },
               ),
               ListTile(

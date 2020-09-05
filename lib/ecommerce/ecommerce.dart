@@ -4,6 +4,9 @@ import 'package:firebase_image/firebase_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sums/model/produit.dart';
+
+import 'detail.dart';
 
 class Ecommerce extends StatefulWidget {
   @override
@@ -14,7 +17,7 @@ class _EcommerceState extends State<Ecommerce> {
   var doc = Firestore.instance;
   QuerySnapshot data;
   StorageReference refs;
-
+Produit prod;
   @override
   void initState() {
     super.initState();
@@ -27,6 +30,8 @@ class _EcommerceState extends State<Ecommerce> {
 
   @override
   Widget build(BuildContext context) {
+                
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Ecommerce"),
@@ -38,11 +43,13 @@ class _EcommerceState extends State<Ecommerce> {
                 itemCount: data.documents.length,
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (ctx, i) {
-                  return InkWell(
+                   prod=new Produit(null,data.documents[i]["nom"],data.documents[i]["prix"],data.documents[i]["image"]);
+                  return data.documents.length!=0? InkWell(
                     onTap: () {
+                     
                       Navigator.of(context).push(new MaterialPageRoute(
                           builder: (ctx) =>
-                              new Detail(data.documents[i]["nom"])));
+                              new Detail(data.documents[i]["image"],data.documents[i]["nom"],data.documents[i]["prix"])));
                     },
                     child: Card(
                         child: Column(
@@ -50,7 +57,7 @@ class _EcommerceState extends State<Ecommerce> {
                         // Image.network(data.documents[i]["image"], ),
                         Expanded(
                           child: CachedNetworkImage(
-                            imageUrl: data.documents[i]["image"],
+                            imageUrl: prod.image.toString(),
                             placeholder: (context, url) => Expanded(
                               child: Shimmer.fromColors(
                                 baseColor: Colors.grey[300],
@@ -67,31 +74,18 @@ class _EcommerceState extends State<Ecommerce> {
                           ),
                         ),
                         Center(
-                          child: Text(data.documents[i]["nom"]),
+                          child: Text(prod.nom.toString()),
+                        ),
+                        Center(
+                          child: Text(prod.prix.toString()),
                         ),
                       ],
                     )),
-                  );
+                  ):Center(child: Text("No items found"),);
                 })
             : Center(
                 child: CircularProgressIndicator(),
               ));
   }
 }
-
-class Detail extends StatefulWidget {
-  String nom;
-  Detail(this.nom);
-
-  @override
-  _DetailState createState() => _DetailState();
-}
-
-class _DetailState extends State<Detail> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(widget.nom),
-    );
-  }
-}
+ 

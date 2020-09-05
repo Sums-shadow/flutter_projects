@@ -4,13 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sums/model/produit.dart';
 
 class ModAdmin extends StatefulWidget {
   @override
   _ModAdminState createState() => _ModAdminState();
 }
-
-
 
 class _ModAdminState extends State<ModAdmin> {
   Firestore fs = Firestore.instance;
@@ -23,9 +22,12 @@ class _ModAdminState extends State<ModAdmin> {
   File img;
   bool updateClick = false;
   TextEditingController nom = TextEditingController();
+  TextEditingController prix = TextEditingController();
+bool click=false;
+  Produit prod;
+  Produit prodsi;
   @override
   void initState() {
-  
     super.initState();
     getData();
   }
@@ -46,7 +48,7 @@ class _ModAdminState extends State<ModAdmin> {
       ),
       body: data == null
           ? Center(child: CircularProgressIndicator())
-          :buildBody() ,
+          : buildBody(),
     );
   }
 
@@ -70,63 +72,78 @@ class _ModAdminState extends State<ModAdmin> {
                 TextField(
                   controller: nom,
                 ),
+                TextField(
+                  controller: prix,
+                ),
                 FlatButton(
                     onPressed: () async {
+                      setState(()=>click=true);
+
                       if (img != null) {
                         updateClick = true;
                         task = ref.ref().child(path).putFile(img);
                         ts = await task.onComplete;
                         url = await ts.ref.getDownloadURL();
+                        prod = new Produit(null, nom.text, prix.text, url);
+                        prodsi =
+                            new Produit.sansImage(null, nom.text, prix.text);
                       }
                       try {
                         url == ""
                             ? await fs
                                 .collection("product")
                                 .document(data.documents[i].documentID)
-                                .updateData({"nom": nom.text}).then((value) {
+                                .updateData({
+                                'nom': nom.text,
+                                'prix': prix.text,
+                              }).then((value) {
                                 updateClick = false;
 
                                 print("update successful");
+                      setState(()=>click=false);
+
                               }).whenComplete(() => Navigator.of(context).pop())
                             : await fs
                                 .collection("product")
                                 .document(data.documents[i].documentID)
-                                .updateData({
-                                "nom": nom.text,
-                                "image": url
-                              }).then((value) {
+                                .updateData(prod.toMap())
+                                .then((value) {
                                 updateClick = false;
                                 getData();
-                                
+
                                 print("update successful");
                               }).whenComplete(
                                     () => Navigator.of(context).pop());
                       } catch (e) {
-                        print("error on update");
+                        print("error on update  $e");
+                      setState(()=>click=false);
+
                       }
 // updateClick?CircularProgressIndicator():
                     },
-                    child: Text("Valider la modification"))
+                    child:click? CircularProgressIndicator(): Text("Valider la modification"))
               ],
             ),
           );
         });
   }
 
-  Widget buildBody(){
+  Widget buildBody() {
     return ListView.builder(
-              itemCount: data.documents.length,
-              itemBuilder: (context, i) {
-                return ListTile(
-                  title: Text(data.documents[i]['nom']),
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(data.documents[i]["image"]),
-                  ),
-                  trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () => dial(context, i)),
-                );
-              });
+        itemCount: data.documents.length,
+        itemBuilder: (context, i) {
+          Produit p = new Produit(null, data.documents[i]["nom"],
+              data.documents[i]["prix"], data.documents[i]["image"]);
+          return ListTile(
+            title: Text(p.nom.toString()),
+            subtitle: Text("\$${p.prix.toString()}"),
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(p.image.toString()),
+            ),
+            trailing: IconButton(
+                icon: Icon(Icons.edit), onPressed: () => dial(context, i)),
+          );
+        });
   }
 
   getImage() {

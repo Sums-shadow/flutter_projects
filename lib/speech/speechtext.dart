@@ -113,6 +113,34 @@ class _SpecheeTextState extends State<SpecheeText> {
                text= text.replaceAll("bonjour", "mbote");
                text= text.replaceAll("comment", "boni");
                text= text.replaceAll("mariage", "libala");
+               text= text.replaceAll("je t'aime", "na lingi yo");
+               text= text.replaceAll("le monde", "mokili");
+               text= text.replaceAll("mange", "lia");
+               text= text.replaceAll("part", "kende");
+               text= text.replaceAll("d'accord", "malamu");
+               text= text.replaceAll("oui", "iyo");
+               text= text.replaceAll("non", "te");
+               text= text.replaceAll("gloire", "nkembo");
+               text= text.replaceAll("offrande", "mabonza");
+               text= text.replaceAll("berger", "mopateli");
+               text= text.replaceAll("courir", "kima");
+               text= text.replaceAll("esprit", "elimo");
+               text= text.replaceAll("Dieu", "nzambe");
+               text= text.replaceAll("jesus", "yesus");
+               text= text.replaceAll("satan", "satana");
+               text= text.replaceAll("voyage", "mobembo");
+               text= text.replaceAll("voiture", "motuka");
+               text= text.replaceAll("poisson", "mbissi");
+               text= text.replaceAll("chante", "yemba");
+               text= text.replaceAll("enfant", "mwana");
+               text= text.replaceAll("adulte", "mukolo");
+               text= text.replaceAll("ami", "masta");
+               text= text.replaceAll("ciel", "likolo");
+               text= text.replaceAll("c'est fini", "esili");
+               text= text.replaceAll("maison", "ndaku");
+               text= text.replaceAll("montagne", "ngomba");
+               text= text.replaceAll("merci", "matondi");
+
                  
               });
             
