@@ -1,6 +1,7 @@
  
 
 import 'package:flutter/material.dart';
+import 'package:sums/ecommerce/allCommande.dart';
 import 'package:sums/ecommerce/commande.dart';
 import 'package:sums/ecommerce/ecommerce.dart';
 
@@ -33,6 +34,14 @@ class _HomeEcommerceState extends State<HomeEcommerce> {
             child: Card(
               child: Center(
                 child: Text("Commandes"),
+              ),
+            ),
+          ),
+           InkWell(
+            onTap:()=>Navigator.of(context).push(new MaterialPageRoute(builder: (ctx)=>AllCommande())),
+            child: Card(
+              child: Center(
+                child: Text("All Commandes"),
               ),
             ),
           )

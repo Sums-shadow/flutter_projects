@@ -114,13 +114,13 @@ class _HomeState extends State<Home> {
                       builder: (ctx) => new SpecheeText()));
                 },
               ),
-              // ListTile(
-              //   title: Text("text to speech"),
-              //   onTap: () {
-              //     Navigator.of(context).push(new MaterialPageRoute(
-              //         builder: (ctx) => new TextSpeech()));
-              //   },
-              // ),
+              ListTile(
+                title: Text("text to speech"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new TextSpeech()));
+                },
+              ),
             ],
           ),
         ),
