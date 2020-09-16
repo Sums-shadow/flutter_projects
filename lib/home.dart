@@ -7,6 +7,7 @@ import 'package:sums/ecommerce/ecommerce.dart';
 import 'package:sums/ecommerce/home_ecom.dart';
 import 'package:sums/localisation/home_localisation.dart';
 import 'package:sums/login.dart';
+import 'package:sums/other/confitti.dart';
 import 'package:sums/quiz/home_quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sums/speech/speechtext.dart';
@@ -119,6 +120,13 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Navigator.of(context).push(new MaterialPageRoute(
                       builder: (ctx) => new TextSpeech()));
+                },
+              ),
+               ListTile(
+                title: Text("confitti"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new Confitti()));
                 },
               ),
             ],

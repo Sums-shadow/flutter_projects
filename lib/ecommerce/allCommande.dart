@@ -28,7 +28,6 @@ class _AllCommandeState extends State<AllCommande> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     init();
   }
