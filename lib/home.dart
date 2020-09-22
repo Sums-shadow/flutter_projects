@@ -10,6 +10,7 @@ import 'package:sums/login.dart';
 import 'package:sums/other/confitti.dart';
 import 'package:sums/quiz/home_quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sums/rtdb/rtdb.dart';
 import 'package:sums/speech/speechtext.dart';
 import 'package:sums/speech/textSpeech.dart';
 import 'package:sums/url_preview/home_url_preview.dart';
@@ -127,6 +128,13 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Navigator.of(context).push(new MaterialPageRoute(
                       builder: (ctx) => new Confitti()));
+                },
+              ),
+              ListTile(
+                title: Text("Rtdb"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new RTDB()));
                 },
               ),
             ],

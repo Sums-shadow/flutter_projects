@@ -35,6 +35,8 @@ dependencies:
   image_picker: ^0.6.7+4
   firebase_storage: ^3.1.6
   firebase_image: ^0.1.6
+  firebase_database: any
+  firebase_core: any
   http: ^0.12.2
   cached_network_image: ^2.3.1
   shimmer: ^1.1.1

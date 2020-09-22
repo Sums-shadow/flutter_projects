@@ -13,13 +13,11 @@ class _ConfittiState extends State<Confitti> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     conf=ConfettiController(duration: Duration(seconds: 1));
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     conf.dispose();
   }
