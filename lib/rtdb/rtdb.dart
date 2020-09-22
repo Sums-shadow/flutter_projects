@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:sums/custom_notification.dart';
 
 class RTDB extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _RTDBState extends State<RTDB> {
   Item item;
   List<Item> items = List();
   FirebaseDatabase db = FirebaseDatabase();
-
+ 
   @override
   void initState() {
     super.initState();
@@ -22,9 +23,9 @@ class _RTDBState extends State<RTDB> {
     itemref.onChildChanged.listen(_childChanged);
     
   }
-_childAdded(Event e){
+_childAdded(Event e)async{
   print("child added ${e.snapshot}");
-  
+  await SumsNotification.showNotification("Codex","${e.snapshot.value['nom']} disponnible");
 // items.add(Item.fromSnap(e.snapshot));
 }
 

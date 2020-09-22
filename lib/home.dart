@@ -1,12 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sums/admin/admin_home.dart';
 import 'package:sums/api/homeapi.dart';
-import 'package:sums/constant.dart';
-import 'package:sums/ecommerce/ecommerce.dart';
+import 'package:sums/custom_notification.dart';
 import 'package:sums/ecommerce/home_ecom.dart';
 import 'package:sums/localisation/home_localisation.dart';
 import 'package:sums/login.dart';
+import 'package:sums/notification/notification.dart';
 import 'package:sums/other/confitti.dart';
 import 'package:sums/quiz/home_quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +26,9 @@ class _HomeState extends State<Home> {
   String user;
   SharedPreferences preferences;
   String message = "Bienvenue";
+
+ 
+  
   init() async {
     preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -39,31 +43,46 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     init();
-
-    // TODO: implement initState
+ 
     super.initState();
   }
-
+ 
+ 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Sums"),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.exit_to_app),
-                onPressed: () {
-                  auth.signOut();
-                  preferences.remove("uid");
-                  preferences.remove("email");
-                  preferences.remove("isLogin");
-                  Navigator.of(context).pushReplacement(
-                      new MaterialPageRoute(builder: (ctx) => new Login()));
-                })
+        appBar: MyAppBar(),
+        drawer:myDrawer(),
+          body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FlatButton(
+              color: Colors.blue,
+              onPressed: ()async{
+                await SumsNotification.showNotification("Codex","un nouveau produit disponnible");
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Show Notification",
+                  style: TextStyle(fontSize: 20.0, color: Colors.white),
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                message,
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ],
-        ),
-        drawer: Drawer(
+        ));
+  }
+
+
+  Widget myDrawer(){
+    return Drawer(
           child: ListView(
             children: <Widget>[
               ListTile(
@@ -137,14 +156,35 @@ class _HomeState extends State<Home> {
                       builder: (ctx) => new RTDB()));
                 },
               ),
+              ListTile(
+                title: Text("Notification"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new Notifications()));
+                },
+              ),
             ],
           ),
-        ),
-        body: Center(
-          child: Text(
-            message,
-            style: TextStyle(fontSize: 32),
-          ),
-        ));
+        );
+      
+  }
+
+  Widget MyAppBar(){
+    return AppBar(
+          title: Text("Sums"),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  auth.signOut();
+                  preferences.remove("uid");
+                  preferences.remove("email");
+                  preferences.remove("isLogin");
+                  Navigator.of(context).pushReplacement(
+                      new MaterialPageRoute(builder: (ctx) => new Login()));
+                })
+          ],
+        );
   }
 }

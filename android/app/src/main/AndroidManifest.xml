@@ -7,10 +7,22 @@
          FlutterApplication and put your custom class here. -->
          <uses-permission android:name="android.permission.RECORD_AUDIO"/>
          <uses-permission android:name="android.permission.INTERNET"/>
+         <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+        
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="sums"
         android:icon="@mipmap/ic_launcher">
+        <!-- for notification local -->
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+
+        <!-- for notification local -->
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
