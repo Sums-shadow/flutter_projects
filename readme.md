@@ -1,19 +1,16 @@
-pour les notifications
-ajouter cette ligne dans le fichier manifest
-<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> //juste apres la balise ouvrante de manifeste
+# sums
 
-et ajouter ceci juste apres la balise ouveante de "application"
- <!-- for notification local -->
- <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-   <intent-filter>
-   <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-   </intent-filter>
-   </receiver>
-  <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+A new Flutter project.
 
- <!-- for notification local -->
+## Getting Started
 
- n'oublier pas d'installer ce plugin 
- flutter_local_notifications: any
+This project is a starting point for a Flutter application.
 
- puis redemarrer votre application
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

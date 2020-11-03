@@ -12,7 +12,6 @@ class DB {
   static final DB _dbHelper = DB._internal();
 
 
-
   DB._internal();
   factory DB() {
     return _dbHelper;

@@ -31,8 +31,6 @@ _childAdded(Event e)async{
 
 _childChanged(Event e){
   print("child changed ${e.snapshot}");
-
-
 }
 
 

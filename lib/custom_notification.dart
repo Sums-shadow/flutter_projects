@@ -13,7 +13,7 @@ String titre, contenu;
         AndroidInitializationSettings('@mipmap/ic_launcher');
     var initializationSettingsIOs = IOSInitializationSettings();
     var initSetttings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOs);
+       android: initializationSettingsAndroid,iOS: initializationSettingsIOs);
 
     flutterLocalNotificationsPlugin.initialize(initSetttings,
         onSelectNotification: onSelectNotification);
@@ -29,9 +29,9 @@ String titre, contenu;
  static showNotification(titre, contenu) async {
     var android = new AndroidNotificationDetails(
         'id', 'channel ', 'description',
-        priority: Priority.High, importance: Importance.Max);
+        priority: Priority.high, importance: Importance.max);
     var iOS = new IOSNotificationDetails();
-    var platform = new NotificationDetails(android, iOS);
+    var platform = new NotificationDetails(android:android, iOS:iOS);
     await flutterLocalNotificationsPlugin.show(
         0, titre, contenu, platform,
         payload: 'Welcome to the Local Notification demo ');
