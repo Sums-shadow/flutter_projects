@@ -1,16 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sums/home.dart';
 import 'package:sums/login.dart';
 
-void main() async{
+void main() async {
+  Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences preferences=await SharedPreferences.getInstance();
-  preferences.getBool("isLogin")==null?runApp(MyApp()):runApp(MyApps());
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.getBool("isLogin") == null ? runApp(MyApp()) : runApp(MyApps());
 // print("Email ${preferences.getString('email')}");
 // print("UID ${preferences.getString('uid')}");
 // print("Is Login ${preferences.getBool('isLogin')}");
-
 }
 
 class MyApp extends StatefulWidget {
@@ -20,15 +21,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
-  
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   
-   
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,12 +36,10 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:Login(),
+      home: Login(),
     );
   }
 }
- 
-
 
 class MyApps extends StatefulWidget {
   @override
@@ -60,7 +56,7 @@ class _MyAppsState extends State<MyApps> {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:Home(),
+      home: Home(),
     );
   }
 }

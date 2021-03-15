@@ -17,7 +17,7 @@ class _NotificationsState extends State<Notifications> {
         AndroidInitializationSettings('@mipmap/ic_launcher');
     var initializationSettingsIOs = IOSInitializationSettings();
     var initSetttings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOs);
+       android: initializationSettingsAndroid,iOS: initializationSettingsIOs);
 
     flutterLocalNotificationsPlugin.initialize(initSetttings,
         onSelectNotification: onSelectNotification);
@@ -89,7 +89,7 @@ class _NotificationsState extends State<Notifications> {
       styleInformation: MediaStyleInformation(),
     );
     var platformChannelSpecifics =
-        NotificationDetails(androidPlatformChannelSpecifics, null);
+        NotificationDetails(android: androidPlatformChannelSpecifics,iOS: null);
     await flutterLocalNotificationsPlugin.show(
         0, 'notification title', 'notification body', platformChannelSpecifics);
   }
@@ -108,7 +108,7 @@ class _NotificationsState extends State<Notifications> {
         'big text channel description',
         styleInformation: bigPictureStyleInformation);
     var platformChannelSpecifics =
-        NotificationDetails(androidPlatformChannelSpecifics, null);
+        NotificationDetails(android:androidPlatformChannelSpecifics,iOS: null);
     await flutterLocalNotificationsPlugin.show(
         0, 'big text title', 'silent body', platformChannelSpecifics,
         payload: "big image notifications");
@@ -126,13 +126,14 @@ class _NotificationsState extends State<Notifications> {
     );
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.schedule(
+       android: androidPlatformChannelSpecifics, iOS:iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      
         0,
         'scheduled title',
         'scheduled body',
         scheduledNotificationDateTime,
-        platformChannelSpecifics);
+        platformChannelSpecifics, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<void> cancelNotification() async {
@@ -142,9 +143,9 @@ class _NotificationsState extends State<Notifications> {
   showNotification() async {
     var android = new AndroidNotificationDetails(
         'id', 'channel ', 'description',
-        priority: Priority.High, importance: Importance.Max);
+        priority: Priority.high, importance: Importance.max);
     var iOS = new IOSNotificationDetails();
-    var platform = new NotificationDetails(android, iOS);
+    var platform = new NotificationDetails(android:android,iOS: iOS);
     await flutterLocalNotificationsPlugin.show(
         0, 'Flutter devs', 'Flutter Local Notification Demo', platform,
         payload: 'Welcome to the Local Notification demo ');

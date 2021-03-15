@@ -21,6 +21,7 @@ class _RTDBState extends State<RTDB> {
     itemref.onChildAdded.listen(_childAdded);
     itemref.onChildChanged.listen(_childChanged);
   }
+<<<<<<< HEAD
 
   _childAdded(Event e) async {
     print("child added ${e.snapshot}");
@@ -28,6 +29,17 @@ class _RTDBState extends State<RTDB> {
         "Codex", "${e.snapshot.value['nom']} disponnible");
 // items.add(Item.fromSnap(e.snapshot));
   }
+=======
+_childAdded(Event e)async{
+  print("child added ${e.snapshot}");
+  await SumsNotification.showNotification("Codex","${e.snapshot.value['nom']} disponnible");
+// items.add(Item.fromSnap(e.snapshot));
+}
+
+_childChanged(Event e){
+  print("child changed ${e.snapshot}");
+}
+>>>>>>> 3232435ea2cc3f292802cea0c27e452d4f2ff443
 
   _childChanged(Event e) {
     print("child changed ${e.snapshot}");

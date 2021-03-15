@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sums/admin/admin_home.dart';
 import 'package:sums/api/homeapi.dart';
+import 'package:sums/auth/login.dart';
 import 'package:sums/custom_notification.dart';
 import 'package:sums/ecommerce/home_ecom.dart';
 import 'package:sums/localisation/home_localisation.dart';
@@ -161,6 +162,13 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   Navigator.of(context).push(new MaterialPageRoute(
                       builder: (ctx) => new Notifications()));
+                },
+              ),
+              ListTile(
+                title: Text("LoginAuth"),
+                onTap: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (ctx) => new LoginAuth()));
                 },
               ),
             ],
