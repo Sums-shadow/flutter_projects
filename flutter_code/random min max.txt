@@ -1,0 +1,20 @@
+import 'dart:math';
+
+randomGen(min, max){
+  var random = Random();
+  
+  // the nextDouble() method returns a random number between 0 and 1
+  var x = random.nextDouble() * (max - min) + min;
+  
+  // If you don't want to return an integer, just remove the floor() method
+  return x.floor();
+}
+
+// Testing
+void main() {
+  // with posstive min and max
+  print(randomGen(10, 100));
+  
+  // with negative min 
+  print(randomGen(-100, 0));
+}

@@ -66,7 +66,7 @@ class _DelAdmState extends State<DelAdm> {
                                       content: Text(
                                           "Voulez-vous vraiment suprimer ${data.documents[i]['nom']}?"),
                                       actions: [
-                                        RaisedButton(
+                                        ElevatedButton(
                                           onPressed: () {
                                             setState(() {
                                               clicked = true;
@@ -88,7 +88,7 @@ class _DelAdmState extends State<DelAdm> {
                                           },
                                           child: Text("Oui"),
                                         ),
-                                        RaisedButton(
+                                        ElevatedButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },

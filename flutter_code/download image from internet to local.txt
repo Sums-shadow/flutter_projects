@@ -1,0 +1,76 @@
+// main.dart
+import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as pathProvider;
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // Remove the debug banner
+      debugShowCheckedModeBanner: false,
+      title: 'Kindacode.com',
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  // After downloading, we'll display the downloaded image
+  File _displayImage; 
+
+  final _url =
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Orange-Whole-%26-Split.jpg/1920px-Orange-Whole-%26-Split.jpg';
+  Future<void> _download() async {
+    final response = await http.get(_url);
+
+    // Get the image name 
+    final imageName = path.basename(_url);
+    // Get the document directory path 
+    final appDir = await pathProvider.getApplicationDocumentsDirectory();
+
+    // This is the saved image path 
+    // You can use it to display the saved image later. 
+    final localPath = path.join(appDir.path, imageName);
+
+    // Downloading
+    final imageFile = File(localPath);
+    await imageFile.writeAsBytes(response.bodyBytes);
+
+    setState(() {
+      _displayImage = imageFile;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Kindacode.com'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            children: [
+              ElevatedButton(onPressed: _download, child: Text('Download Image')),
+              SizedBox(height: 25),
+              _displayImage != null ? Image.file(_displayImage) : Container()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
